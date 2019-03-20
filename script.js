@@ -1,49 +1,33 @@
-// uwtórz 100 samochodów z różnym paliwem
-
-// for (i = 0; i < 100; i++){
-//     cars.push({
-//         fuelTank: 100 - i,
-//     })
-// }
-
-// const makeCar = function(fuelTank) {
-//     return{
-//         fuelTank: fuelTank,
-//         move: function (combustion){
-//             this.fuelTank = this.fuelTank - combustion
-//         }
-//     }
-// }
-
-// const cars = [];
-
-// for (i = 0; i < 100; i++){
-//     const car = makeCar(100 - i)
-//     cars.push(car)
-// }
-
-// console.log(cars)
-
-// const car10 = cars[9]
-// car10.move(10)
-
-// console.log('car10: ', car10)
-
-
-function Car() {
-    this.fuelTank = 100
+//state
+function Counter () {
+    this.number = 0
+    this.render()
 }
 
-Car.prototype.move = function (){
-    this.fuelTank = this.fuelTank - 10
+//action
+Counter.prototype.inc = function (){
+    this.number = this.number + 1
+    this.render()
 }
 
-const car1 = new Car()
-const car2 = new Car()
+//view
+Counter.prototype.render = function (){
+    document.body.innerHTML = ''
 
-console.log(car1)
-console.log(car2)
-console.log(car1 === car2)
+    const h1 = document.createElement('h1')
+    const button = document.createElement('button')
+
+    button.innerHTML = '+'
+    h1.innerText = this.number
+
+    document.body.appendChild(h1)
+    document.body.appendChild(button)
+    button.addEventListener(
+        'click', 
+        this.inc.bind(this)         // () => this.inc()     the same
+    )
+}
+
 
 
 
