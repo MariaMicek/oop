@@ -11,15 +11,16 @@ const car1 = {
 
 const car2 = {
     fuelTank: 150,
-    move: move,
+    move: move.bind(car1),      //przypisuje funkcje z car1 do car2 (spina je ze sobą), czyli wywołuje ją na car1 a nie na car2
 }
 
 car1.move(10)
 car1.move(20)
 
-car2.move.call(car1, 10)        //gdy funkcja ma więcej parametów to należy podać więcej argumentów 
-car2.move.apply(car1, [20])     //działa tak samo
 car2.move(10)
+car2.move(20)
+car2.move(5)
+
 
 console.log('car1: ', car1)
 console.log('car2: ', car2)
