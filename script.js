@@ -1,69 +1,43 @@
-//EXERCISE 1
-const Person = function (name, lastname) {
+const ArrayPusher = function() {
 
-    this.name = name;
-    this.lastname = lastname;
+    this.array = []
 
 }
 
-Person.prototype.laugh = function () {
-    console.log('ha ha ha')
-}
+ArrayPusher.prototype.push = function(x) {
 
-const Marysia = new Person('Marysia', 'Micek');
-const Ala = new Person('Ala', 'Pfsjgg')
-console.log(Marysia)
-console.log(Ala.laugh())
-console.dir(Person)
-
-
-//EXERCISE 2
-const Result = function(a, b) {
-
-    this.sum = a + b;
-    this.minus = a - b;
-    this.multiply = a * b;
-    this.divide = a / b;
+    this.array.push(x)      // this.array = this.array.concat(x) 
 
 }
 
-const sum1 = new Result(1, 4)
-const sum2 = new Result(3, 4)
-console.log(sum1)
-console.log(sum2)
-console.dir(Result)
+ArrayPusher.prototype.sum = function() {
 
-
-//EXERCISE 3
-const Square = function (x) {
-
-    this.square = x * x;
-    this.reverse = Math.sqrt(this.square)
-
-}
-
-const result = new Square(1)
-const result1 = new Square(2)
-console.log(result)
-console.log(result1)
-
-
-//EXERCISE 4
-const Power = function (number, factor) {
-
-    let sum = 1;
-    for(let i = 0; i < factor; i++) {
-        sum = sum * number
+    let sum = 0
+    for(let i = 0; i < this.array.length; i++){     // this.array.reduce((r, e) => r + e, 0)
+        sum = sum + this.array[i]
     }
-    this.powered = sum
+    return sum
 }
 
-const poweredResult1 = new Power(2,1)
-const poweredResult2 = new Power(2,2)
-const poweredResult3 = new Power(2,3)
-console.log(poweredResult1)
-console.log(poweredResult2)
-console.log(poweredResult3)
+ArrayPusher.prototype.average = function() {
+    
+    return this.sum() / this.array.length
 
+}
 
+const pusher1 = new ArrayPusher()
+pusher1.push(1)
+pusher1.push(4)
+pusher1.push(5)
+console.log(pusher1)
+console.log(pusher1.sum())
+console.log(pusher1.average())
+
+const pusher2 = new ArrayPusher()
+pusher2.push(10)
+pusher2.push(14)
+pusher2.push(6)
+console.log(pusher2)
+console.log(pusher2.sum())
+console.log(pusher2.average())
 
