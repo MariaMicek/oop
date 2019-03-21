@@ -1,65 +1,69 @@
-//state
-function Counter () {
-    this.number = 0
-    this.render()
+//EXERCISE 1
+const Person = function (name, lastname) {
+
+    this.name = name;
+    this.lastname = lastname;
+
 }
 
-//action
-Counter.prototype.inc = function (){
-    this.number = this.number + 1
-    this.render()
+Person.prototype.laugh = function () {
+    console.log('ha ha ha')
 }
 
-Counter.prototype.minus = function () {
-    this.number = this.number - 1
-    this.render()
+const Marysia = new Person('Marysia', 'Micek');
+const Ala = new Person('Ala', 'Pfsjgg')
+console.log(Marysia)
+console.log(Ala.laugh())
+console.dir(Person)
+
+
+//EXERCISE 2
+const Result = function(a, b) {
+
+    this.sum = a + b;
+    this.minus = a - b;
+    this.multiply = a * b;
+    this.divide = a / b;
+
 }
 
-//view
-Counter.prototype.render = function (){
-    document.body.innerHTML = ''
-
-    const h1 = document.createElement('h1')
-    const button = document.createElement('button')
-    const button2 = document.createElement('button')
+const sum1 = new Result(1, 4)
+const sum2 = new Result(3, 4)
+console.log(sum1)
+console.log(sum2)
+console.dir(Result)
 
 
-    button.innerHTML = '+'
-    button2.innerHTML = '-'
-    h1.innerText = this.number
+//EXERCISE 3
+const Square = function (x) {
 
-    document.body.appendChild(h1)
-    document.body.appendChild(button)
-    document.body.appendChild(button2)
+    this.square = x * x;
+    this.reverse = Math.sqrt(this.square)
 
-    document.body.style.display = 'flex'
-    document.body.style.flexWrap = 'wrap'
-    document.body.style.textAlign = 'center'
-    document.body.style.justifyContent = 'center'
-    h1.style.width = '100%'
-    h1.style.fontSize = '50px'
-    button.style.width = '15%'
-    button.style.height = '50px'
-    button.style.marginRight = '5px'
-    button.style.fontSize = '25px'
-    button2.style.width = '15%'
-    button2.style.height = '50px'
-    button2.style.fontSize = '25px'
-
-    button.addEventListener(
-        'click', 
-        this.inc.bind(this)        
-    )
-
-    button2.addEventListener(
-        'click', 
-        () => this.minus()
-    )
 }
 
+const result = new Square(1)
+const result1 = new Square(2)
+console.log(result)
+console.log(result1)
 
 
+//EXERCISE 4
+const Power = function (number, factor) {
 
+    let sum = 1;
+    for(let i = 0; i < factor; i++) {
+        sum = sum * number
+    }
+    this.powered = sum
+}
+
+const poweredResult1 = new Power(2,1)
+const poweredResult2 = new Power(2,2)
+const poweredResult3 = new Power(2,3)
+console.log(poweredResult1)
+console.log(poweredResult2)
+console.log(poweredResult3)
 
 
 
