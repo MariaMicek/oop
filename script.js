@@ -1,108 +1,62 @@
-const ArrayPusher = function(selector) {
+function Square(color) {
 
-    this.container = document.querySelector(selector) || document.body
-    this.array = []
-    this.inputValue = 0
-    this.render()
-
+    this.element = document.createElement('div')
+    this.element.style.width = '200px'
+    this.element.style.height = '200px'
+    this.element.style.margin = '10px'
+    this.element.style.backgroundColor = color || 'red'
+    document.body.appendChild(this.element)
+    
 }
 
-ArrayPusher.prototype.render = function (){
+Square.prototype.changeColor = function (color) {
+    this.element.style.backgroundColor = color
+}
 
-    this.container.innerHTML = ''
-    const input = document.createElement('input')
-    const button = document.createElement('button')
-    const numbers = document.createElement('p')
-    const arrayContainer = this.renderNumbersArray()
-    const sum = document.createElement('p')
-    const average = document.createElement('p')
+let arrayOfSquares = []
+for (let i = 0; i < 3; i++) {
+    arrayOfSquares = arrayOfSquares.concat(new Square())
+}
 
-    this.container.appendChild(input)
-    this.container.appendChild(button)
-    this.container.appendChild(numbers)
-    this.container.appendChild(arrayContainer)
-    this.container.appendChild(sum)
-    this.container.appendChild(average)
+//CIRCLE
 
-    input.setAttribute('type', 'number')
-    input.value = this.inputValue
-    button.innerText = "ADD"
-    numbers.textContent = `Numbers: `
-    sum.textContent = `Sum: ${this.sum()}`
-    average.textContent = `Average: ${this.average()}`
+function Circle() {
 
+    this.element = document.createElement('div')
+    this.element.style.width = '200px'
+    this.element.style.height = '200px'
+    this.element.style.borderRadius = '100px'
+    this.element.style.backgroundColor = 'red'
+    document.body.appendChild(this.element)
 
-    input.addEventListener(
-
-        'input',
-        event => this.inputValue = Number(event.target.value)
-
-    )
-
-    button.addEventListener(
+    this.element.addEventListener(
 
         'click',
-        () => this.push(this.inputValue)
-
+        () => this.toggleColor('green')
     )
-
+   
 }
 
-ArrayPusher.prototype.renderNumbersArray = function() {
+Circle.prototype.toggleColor = function () {
 
-    const arrayContainer = document.createElement('div')
-
-    this.array.forEach( (number, index) => {
-
-        const div = document.createElement('div')
-        const buttonDelete = document.createElement('button')
-
-        div.innerText = number
-        buttonDelete.innerText = "DELETE"
-
-        buttonDelete.addEventListener(
-            'click',
-            () => this.remove(index)
-        )
-
-        div.appendChild(buttonDelete)
-        arrayContainer.appendChild(div)
-
-    })
-
-    return arrayContainer
-}
-
-ArrayPusher.prototype.push = function(newValue) {
-
-    this.array = this.array.concat(newValue) 
-    
-    this.render()
-
-}
-
-ArrayPusher.prototype.remove = function(removedElementIndex) {
-
-    this.array = this.array.filter((el,i) => i !== removedElementIndex)
-
-    this.render()
-
-}
-
-ArrayPusher.prototype.sum = function() {
-
-    let sum = 0
-    for(let i = 0; i < this.array.length; i++){     // this.array.reduce((r, e) => r + e, 0)
-        sum = sum + this.array[i]
+    if (this.element.style.backgroundColor === 'red'){
+        this.changeColor('green')
+    } else {
+        this.changeColor('red')
     }
-    return sum
-}
-
-ArrayPusher.prototype.average = function() {
-    
-    if (this.array.length === 0) return 0
-    return this.sum() / this.array.length
 
 }
+
+Circle.prototype.changeColor = function (color) {
+
+    this.element.style.backgroundColor = color
+
+}
+
+let arrayOfCircles = []
+for (let i = 0; i < 3; i++) {
+    arrayOfCircles = arrayOfCircles.concat(new Circle())
+}
+
 
 
