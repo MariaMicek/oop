@@ -1,62 +1,43 @@
-function Square(color) {
-
-    this.element = document.createElement('div')
-    this.element.style.width = '200px'
-    this.element.style.height = '200px'
-    this.element.style.margin = '10px'
-    this.element.style.backgroundColor = color || 'red'
-    document.body.appendChild(this.element)
-    
+//CONSTRUCTOR FUNCTION
+function CarConstructor () {
+    this.fuelTank = 100
 }
 
-Square.prototype.changeColor = function (color) {
-    this.element.style.backgroundColor = color
+CarConstructor.prototype.move = function() {
+    this.fuelTank = this.fuelTank - 10
 }
 
-let arrayOfSquares = []
-for (let i = 0; i < 3; i++) {
-    arrayOfSquares = arrayOfSquares.concat(new Square())
-}
+const car1 = new CarConstructor()
+car1.move()
+console.log(car1)
 
-//CIRCLE
 
-function Circle() {
+//CLASS
+class Car {                         // bez nawisów
 
-    this.element = document.createElement('div')
-    this.element.style.width = '200px'
-    this.element.style.height = '200px'
-    this.element.style.borderRadius = '100px'
-    this.element.style.backgroundColor = 'red'
-    document.body.appendChild(this.element)
+    constructor(){                  //w klasie funkcje (metody) zapisuje się bez słówka function, wszystko ląduje w class body, właściwości w funkcji constructor, a zwykłe metody oddzielnie
+        this.fuelTank = 100         //constructor wywoła się poprzez tworzenie nowego obiektu ze słówkiem new
+    }
 
-    this.element.addEventListener(
-
-        'click',
-        () => this.toggleColor('green')
-    )
-   
-}
-
-Circle.prototype.toggleColor = function () {
-
-    if (this.element.style.backgroundColor === 'red'){
-        this.changeColor('green')
-    } else {
-        this.changeColor('red')
+    move(){
+    this.fuelTank = this.fuelTank - 10
     }
 
 }
 
-Circle.prototype.changeColor = function (color) {
+const car2 = new Car()
+car2.move()
+console.log(car2)
 
-    this.element.style.backgroundColor = color
+
+
+class Person {
+
+    constructor(name){
+        this.name = name
+    }
 
 }
 
-let arrayOfCircles = []
-for (let i = 0; i < 3; i++) {
-    arrayOfCircles = arrayOfCircles.concat(new Circle())
-}
-
-
-
+const person1 = new Person('Marysia')
+console.log(person1)
