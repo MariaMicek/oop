@@ -1,43 +1,26 @@
-//CONSTRUCTOR FUNCTION
-function CarConstructor () {
-    this.fuelTank = 100
-}
+class Counter {
 
-CarConstructor.prototype.move = function() {
-    this.fuelTank = this.fuelTank - 10
-}
-
-const car1 = new CarConstructor()
-car1.move()
-console.log(car1)
-
-
-//CLASS
-class Car {                         // bez nawisów
-
-    constructor(){                  //w klasie funkcje (metody) zapisuje się bez słówka function, wszystko ląduje w class body, właściwości w funkcji constructor, a zwykłe metody oddzielnie
-        this.fuelTank = 100         //constructor wywoła się poprzez tworzenie nowego obiektu ze słówkiem new
+    constructor(){
+        this.number = 0
     }
 
-    move(){
-    this.fuelTank = this.fuelTank - 10
+    inc(){
+        this.number = this.number + 1
     }
 
-}
-
-const car2 = new Car()
-car2.move()
-console.log(car2)
-
-
-
-class Person {
-
-    constructor(name){
-        this.name = name
+    minus(){
+        this.number = this.number - 1
     }
-
 }
 
-const person1 = new Person('Marysia')
-console.log(person1)
+const counter1 = new Counter()
+console.log(counter1)
+
+counter1.inc()
+counter1.inc()
+counter1.inc()
+console.log(counter1)
+
+counter1.minus()
+counter1.minus()
+console.log(counter1)
