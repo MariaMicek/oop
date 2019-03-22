@@ -1,57 +1,97 @@
-class Animal {
+class ToDo {
 
-    constructor(legs, sound){
-        this.legs = legs
-        this.sound = sound
+    constructor(selector){
+
+        this.container = document.querySelector(selector) || document.body
+
+        this.tasks = JSON.parse(localStorage.getItem('to-do-list')) || []
+
+        this.render()
     }
 
-    makeSound(){
-        console.log(this.sound)
-    }
+    addTask(newTaskText){
 
-    sayHello(){
-        if (this.name){
-            console.log(`Hello, I am ${this.name}`)
-        } else {
-            console.log('I don\'t have a name...')
+        const newTask = {
+            text: newTaskText,
+            isCompleted: false,
         }
+
+        this.tasks = this.tasks.concat(newTask)
+
+        this.render()
+        this.saveTasks()
+    }
+
+    toggleTask(taskIndex){
+
+        this.tasks = this.tasks.map(
+
+            (task, index) => (
+                index === taskIndex ?
+                {
+                text: task.text,
+                isCompleted: !task.isCompleted
+                }:
+                task
+            )
+            
+        )
+
+        this.render()
+        this.saveTasks()
+    }
+
+    saveTasks(){
+        
+        localStorage.setItem('to-do-list', JSON.stringify(this.tasks))
+    }
+
+    render(){
+
+        this.container.innerHTML = ''
+        this.renderFrom()
+
+        this.tasks.forEach( 
+
+            (task, index) => this.renderTask(task, index)
+        )
+    }
+
+    renderTask(task, index){
+
+        const div = document.createElement('div')
+        div.innerText = task.text
+
+        div.addEventListener(
+            'click',
+            () => this.toggleTask(index) 
+        )
+
+        if (task.isCompleted){
+            div.style.textDecoration = 'line-through'
+        }
+
+        this.container.appendChild(div)
+    }
+
+    renderFrom(){
+
+        const div = document.createElement('div')
+        const input = document.createElement('input')
+        const button = document.createElement('button')
+
+        input.setAttribute('placeholder', 'Nowe Zadanie')
+        button.innerText = 'DODAJ'
+
+        button.addEventListener(
+            'click',
+            () => this.addTask(input.value)
+        )
+
+        div.appendChild(input)
+        div.appendChild(button)
+        this.container.appendChild(div)
     }
 
 }
-const animal1 = new Animal(8, 'Wrrrr')
-console.log(animal1)
-console.log(animal1.makeSound())
-console.log(animal1.sayHello())
-
-
-
-class Dog extends Animal {              //dziedziczenie
-
-    constructor(name){
-        super(4,'Woof!')             // super() wywołuje constructor klasy nadrzędnej
-        this.name = name
-    }
-
-}
-const dog1 = new Dog('Puszek')
-console.log(dog1)
-console.log(dog1.makeSound())
-console.log(dog1.sayHello())
-
-
-
-class Cat extends Animal {
-
-    constructor(name){
-        super(4, 'Meow...')
-        this.name = name
-    }
-}
-const cat1 = new Cat('Mruczek')
-console.log(cat1)
-console.log(cat1.makeSound())
-console.log(cat1.sayHello())
-
-
-
 
